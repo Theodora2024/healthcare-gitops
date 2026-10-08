@@ -1,0 +1,19 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: healthcare-prod
+
+resources:
+  - ../../base
+  - secrets/backend-external-secret.yaml
+
+images:
+  - name: healthcare-backend
+    newName: 245758552830.dkr.ecr.eu-west-2.amazonaws.com/healthcare-prod-backend
+    newTag: latest
+  - name: healthcare-frontend
+    newName: 245758552830.dkr.ecr.eu-west-2.amazonaws.com/healthcare-prod-frontend
+    newTag: latest
+
+patches:
+  - path: patch.yaml

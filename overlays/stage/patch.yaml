@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+spec:
+  replicas: 2
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+spec:
+  replicas: 2
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: healthcare
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: stage-healthcare.isidorah.site
+spec:
+  rules:
+    - host: stage-healthcare.isidorah.site

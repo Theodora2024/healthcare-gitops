@@ -1,0 +1,33 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: healthcare
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80},{"HTTPS":443}]'
+    alb.ingress.kubernetes.io/ssl-redirect: "443"
+    alb.ingress.kubernetes.io/group.name: central
+    alb.ingress.kubernetes.io/load-balancer-name: central-alb
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:eu-west-2:245758552830:certificate/13375ed7-cd72-4de7-8835-54dba55e9b29
+    external-dns.alpha.kubernetes.io/ttl: "300"
+spec:
+  ingressClassName: alb
+  rules:
+    - host: healthcare.isidorah.site
+      http:
+        paths:
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: backend
+                port:
+                  number: 5000
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: frontend
+                port:
+                  number: 80
