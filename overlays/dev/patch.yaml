@@ -21,3 +21,19 @@ metadata:
 spec:
   rules:
     - host: dev-healthcare.isidorah.site
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: backend
+spec:
+  minReplicas: 1
+  maxReplicas: 1
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: frontend
+spec:
+  minReplicas: 1
+  maxReplicas: 1
