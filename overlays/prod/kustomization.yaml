@@ -10,10 +10,10 @@ resources:
 images:
   - name: healthcare-backend
     newName: 245758552830.dkr.ecr.eu-west-2.amazonaws.com/healthcare-prod-backend
-    newTag: latest
+    newTag: a496e9c
   - name: healthcare-frontend
     newName: 245758552830.dkr.ecr.eu-west-2.amazonaws.com/healthcare-prod-frontend
-    newTag: latest
+    newTag: a496e9c
 
 patches:
   - path: patch.yaml
